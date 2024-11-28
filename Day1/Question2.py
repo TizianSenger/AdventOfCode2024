@@ -7,3 +7,4 @@ def readDataFromFile():
     file.close()
 
 readDataFromFile()
+print("Test")
