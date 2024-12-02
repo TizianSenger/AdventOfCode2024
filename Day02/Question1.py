@@ -7,7 +7,7 @@ maxDif = 3
 
 def readDataFromFile():
     global listOfListsData
-    file = open(r"Day2/source.txt", "r")
+    file = open(r"Day02/source.txt", "r")
     content = file.read().splitlines()
     for element in content:
         tempArr = list(map(int, element.split()))

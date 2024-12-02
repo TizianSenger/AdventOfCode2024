@@ -7,7 +7,7 @@ listOfDifs = []
 
 def readDataFromFile():
     global inputData
-    file = open("Day1\source.txt", "r")
+    file = open("Day01\source.txt", "r")
     content = file.read()
     content = content.split("\n")
     for element in content:

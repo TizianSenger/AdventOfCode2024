@@ -6,7 +6,7 @@ maxDif = 3
 
 def readDataFromFile():
     global listOfListsData
-    file = open(r"Day2/source.txt", "r")
+    file = open(r"Day02/source.txt", "r")
     for line in file:
         listOfListsData.append(list(map(int, line.split())))
     file.close()
