@@ -3,7 +3,7 @@ print("Day1 Question1")
 
 scrambledString = ""
 multiplicants = []
-regexPattern = r'mul\(\d+,\d+\)'
+regexPattern = r'(do|dont|mul\(\d+,\d+\))'
 
 print("regex is complete shit just dont use it i hate my life")
 
@@ -19,11 +19,13 @@ def cleanExtractData():
     extractedMuls = re.findall(regexPattern, scrambledString)
     enabled = True
     for element in extractedMuls:
-        if "do()" in element:
+        print(element)
+        if "do" in element:
             enabled = True
-            element = element.replace("do()", "")
-        elif "dont()" in element:
+            continue
+        elif "dont" in element:
             enabled = False
+            continue
         if enabled == True:
             element = element.replace("mul(", "")
             element = element.replace(")", "")
