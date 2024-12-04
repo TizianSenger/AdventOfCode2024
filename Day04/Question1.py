@@ -1,41 +1,44 @@
-print("Day1 Question1")
+print("Day4 Question1")
+
+fileContent = []
+seaWord = "XMAS"
+lenOfWord = len(seaWord)
 
 def readDataFromFile():
-    file = open("AdventOfCode2024\Day1\source.txt", "r")
-    content = file.read()
-    print(content)
-    file.close()
+    global fileContent
+    with open("Day04/source.txt", "r") as file:
+        fileContent[:] = [list(line.strip()) for line in file.readlines()]
+
+def inBounds(x, y):
+    return 0 <= x < len(fileContent) and 0 <= y < len(fileContent[0])
+
+def searchWord(layerIndex, caracterIndex, dx, dy):
+    for i in range(lenOfWord):
+        nx, ny = layerIndex + i * dx, caracterIndex + i * dy
+        if not inBounds(nx, ny) or fileContent[nx][ny] != seaWord[i]:
+            return False
+    return True
+
+def organizeDataAndReplaceX():
+    directions = [
+        (0, 1),  # rechts
+        (0, -1),  # links
+        (-1, 0),  # oben
+        (1, 0),  # unten
+        (1, 1),  # diagonal rechts unten
+        (-1, 1),  # diagonal rechts oben
+        (1, -1),  # diagonal links unten
+        (-1, -1)  # diagonal links oben
+    ]
+    counter = 0
+    for layerIndex in range(len(fileContent)):
+        for caracterIndex in range(len(fileContent[layerIndex])):
+            for dx, dy in directions:
+                if searchWord(layerIndex, caracterIndex, dx, dy):
+                    counter += 1
+                    #print("gefunden")
+    print(counter)
+
 
 readDataFromFile()
-
-
-Um ein Regex zu erstellen, das auf ein beliebiges Präfix aus do() oder dont(), gefolgt von einer beliebigen Anzahl an Zeichen (außer dem genauen Muster mul(\d+,\d+)), und schließlich dem exakten mul(\d+,\d+) am Ende prüft, kannst du das folgende Regex verwenden:
-
-^(do|dont).*?(?<!mul\d+,\d+)mul\d+,\d+$
-
-Erklärung:
-
-^ : Start des Strings.
-
-(do|dont) : Entweder do() oder dont().
-
-.*? : Beliebige Zeichen (nicht-gierig).
-
-(?<!mul\d+,\d+) : Negative Lookbehind, um sicherzustellen, dass das Muster nicht direkt vor dem finalen mul(\d+,\d+) steht.
-
-mul\d+,\d+$ : Sucht exakt nach mul(zahl,zahl) am Ende des Strings.
-
-$ : Ende des Strings.
-
-
-Beispiele:
-
-✅ do()abcxyzmul(12,34) – Matcht.
-
-❌ do()abcxyzmul(56,78)mul(12,34) – Kein Match, da das Muster zweimal vorkommt.
-
-✅ dont()anything123mul(9,0) – Matcht.
-
-
-Lass mich wissen, falls du weitere Anpassungen benötigst!
-
+organizeDataAndReplaceX()
