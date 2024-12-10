@@ -1,9 +1,12 @@
-print("Day1 Question1")
+print("Day5 Question1")
 
 def readDataFromFile():
-    file = open("AdventOfCode2024\Day1\source.txt", "r")
+    file = open("AdventOfCode2024\Day05\source.txt", "r")
     content = file.read()
     print(content)
     file.close()
 
 readDataFromFile()
+
+
+
